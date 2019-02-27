@@ -46,7 +46,7 @@ services:
         aliases:
           - authoring-elasticsearch  
   tomcat:
-    image: craftercms/authoring_tomcat
+    image: craftercms/authoring_tomcat:3.1.0-SNAPSHOT # craftercms version flag
     depends_on:
       - mariadb
       - elasticsearch
@@ -69,7 +69,7 @@ services:
         aliases:
           - authoring-tomcat
   deployer:
-    image: craftercms/deployer
+    image: craftercms/deployer:3.1.0-SNAPSHOT # craftercms version flag
     depends_on:
       - elasticsearch  
     ports:
