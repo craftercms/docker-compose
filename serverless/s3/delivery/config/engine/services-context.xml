@@ -4,6 +4,7 @@
      xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
   <import resource="classpath*:crafter/engine/mode/multi-tenant/simple/services-context.xml" />
-  <import resource="classpath*:crafter/engine/store/s3/store-context.xml"/>
+  <import resource="classpath*:crafter/engine/extension/store/s3/store-context.xml"/>
+  <import resource="classpath*:crafter/engine/extension/deployment-events-context.xml"/>
 
 </beans>
