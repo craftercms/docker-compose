@@ -22,10 +22,6 @@ services:
       - MYSQL_ALLOW_EMPTY_PASSWORD=yes     
     volumes:
       - mariadb_data:/var/lib/mysql
-    networks:
-      craftercms:
-        aliases:
-          - authoring-mariadb
   elasticsearch:
     image: docker.elastic.co/elasticsearch/elasticsearch:6.6.0
     ports:
@@ -41,10 +37,6 @@ services:
     volumes:
       - elasticsearch_data:/usr/share/elasticsearch/data
       - elasticsearch_logs:/usr/share/elasticsearch/logs
-    networks:
-      craftercms:
-        aliases:
-          - authoring-elasticsearch  
   tomcat:
     image: craftercms/authoring_tomcat:3.1.0-SNAPSHOT # craftercms version flag
     depends_on:
@@ -58,16 +50,12 @@ services:
       - crafter_logs:/opt/crafter/logs
       - crafter_temp:/opt/crafter/temp
     environment:
-      - MARIADB_HOST=authoring-mariadb
+      - MARIADB_HOST=mariadb
       - MARIADB_PORT=3306      
-      - DEPLOYER_HOST=authoring-deployer
+      - DEPLOYER_HOST=deployer
       - DEPLOYER_PORT=9191
-      - ES_HOST=authoring-elasticsearch
+      - ES_HOST=elasticsearch
       - ES_PORT=9200
-    networks:
-      craftercms:
-        aliases:
-          - authoring-tomcat
   deployer:
     image: craftercms/deployer:3.1.0-SNAPSHOT # craftercms version flag
     depends_on:
@@ -79,14 +67,10 @@ services:
       - crafter_logs:/opt/crafter/logs
       - crafter_temp:/opt/crafter/temp
     environment:
-      - TOMCAT_HOST=authoring-tomcat
+      - TOMCAT_HOST=tomcat
       - TOMCAT_HTTP_PORT=8080
-      - ES_HOST=authoring-elasticsearch
+      - ES_HOST=elasticsearch
       - ES_PORT=9200
-    networks:
-      craftercms:
-        aliases:
-          - authoring-deployer
 volumes:
   mariadb_data:
     name: crafter_authoring_data_mariadb
@@ -100,6 +84,3 @@ volumes:
     name: crafter_authoring_logs
   crafter_temp:
     name: crafter_authoring_temp
-networks:
-  craftercms:
-    name: craftercms
