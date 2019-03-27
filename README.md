@@ -55,13 +55,21 @@ background.
 
 1. Make sure the authoring/delivery environment is down (`docker-compose down`).
 2. `cd` to the authoring/delivery compose project folder.
-3. `docker-compose run --rm --no-deps -v /host/path/to/backups:/opt/crafter/backups tomcat backup`.
+3. `docker-compose run --rm --no-deps -v /host/path/to/backups:/opt/crafter/backups tomcat backup`. E.g.
+`docker-compose run --rm --no-deps -v C:/Users/jdoe/Documents/Backups:/opt/crafter/backups tomcat backup`
+
+**NOTE:** In Windows, make sure `/host/path/to/backups` points to a path in a shared drive (check Docker's Settings > 
+Shared Drives)
 
 # Restore Authoring/Delivery
 
 1. Make sure the authoring/delivery environment is down. (`docker-compose down`).
 2. `cd` to the authoring/delivery compose project folder.
 3. `docker-compose run --rm --no-deps -v /host/path/to/backups:/opt/crafter/backups tomcat restore ./backups/<BACKUP_NAME>`.
+E.g. `docker-compose run --rm --no-deps -v C:/Users/jdoe/Documents/Backups:/opt/crafter/backups tomcat restore ./backups/crafter-authoring-backup.2019-03-28-00-58-33.zip`
+
+**NOTE:** In Windows, make sure `/host/path/to/backups` points to a path in a shared drive (check Docker's Settings > 
+Shared Drives)
 
 # Run a command inside a running container
 
