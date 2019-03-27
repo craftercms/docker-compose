@@ -5,10 +5,10 @@ environments:
 
 * Authoring
 * Delivery
-* Serverless Delivery (external ElasticSearch service and content stored in S3)
+* Serverless Delivery (external Elasticsearch service and content stored in S3)
 
 **NOTE:** These files are intended for development use only. We recommend you create your own set of Docker compose
-files for production and use these ones as reference.
+files for production and use these as reference.
 
 # Pre-requisites
 
