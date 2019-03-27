@@ -8,7 +8,7 @@ environments:
 * Serverless Delivery (external Elasticsearch service and content stored in S3)
 
 **NOTE:** These files are intended for development use only. We recommend you create your own set of Docker compose
-files for production and use these as reference.
+files for production and use these as a reference.
 
 # Pre-requisites
 
@@ -53,13 +53,13 @@ background.
 
 # Backup Authoring/Delivery
 
-1. Make sure the authoring/delivery environment is down.
+1. Make sure the authoring/delivery environment is down (`docker-compose down`).
 2. `cd` to the authoring/delivery compose project folder.
 3. `docker-compose run --rm --no-deps -v /host/path/to/backups:/opt/crafter/backups tomcat backup`.
 
 # Restore Authoring/Delivery
 
-1. Make sure the authoring/delivery environment is down.
+1. Make sure the authoring/delivery environment is down. (`docker-compose down`).
 2. `cd` to the authoring/delivery compose project folder.
 3. `docker-compose run --rm --no-deps -v /host/path/to/backups:/opt/crafter/backups tomcat restore ./backups/<BACKUP_NAME>`.
 
