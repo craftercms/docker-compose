@@ -5,7 +5,10 @@ environments:
 
 * Authoring
 * Delivery
-* Serverless Delivery (content stored in S3)
+* Serverless Delivery (external Elasticsearch service and content stored in S3)
+
+**NOTE:** These files are intended for development use only. We recommend you create your own set of Docker compose
+files for production and use these as a reference.
 
 # Pre-requisites
 
@@ -25,11 +28,17 @@ background.
 3. `docker-compose up` to run the containers in the foreground or `docker-compose up -d` to run them detached in the 
 background.
 
-## Create Delivery Site
+## Create a Delivery Site
 
-1. Log into the Delivery Deployer container: `docker exec -it delivery_deployer_1 bash`.
-2. Create site by calling `init-site.sh` script (the authoring data folder is mounted under `/data/authoring`): 
-`./bin/init-site.sh mysite /data/authoring/repos/sites/mysite/published`.
+1. `cd delivery`.
+2. `docker-compose exec deployer gosu crafter ./bin/init-site.sh <SITE_NAME> /data/authoring/repos/sites/<SITE_NAME>/published` 
+(remember to replace `<SITENAME>` for the actual site name).
+
+## Delete a Delivery Site
+
+1. `cd delivery`.
+2. `docker-compose exec deployer gosu crafter ./bin/remove-site.sh <SITE_NAME>` (remember to replace `<SITE_NAME>` for 
+the actual site name).
 
 # Start Serverless Delivery Environment
 
@@ -41,3 +50,46 @@ deployment to S3 for Delivery.
 file to specify the required properties to read the content from Delivery (mostly just replace what's in `<>`).
 5. `docker-compose up` to run the containers in the foreground or `docker-compose up -d` to run them detached in the 
 background.
+
+# Backup Authoring/Delivery
+
+1. Make sure the authoring/delivery environment is down (`docker-compose down`).
+2. `cd` to the authoring/delivery compose project folder.
+3. `docker-compose run --rm --no-deps -v /host/path/to/backups:/opt/crafter/backups tomcat backup`.
+
+# Restore Authoring/Delivery
+
+1. Make sure the authoring/delivery environment is down. (`docker-compose down`).
+2. `cd` to the authoring/delivery compose project folder.
+3. `docker-compose run --rm --no-deps -v /host/path/to/backups:/opt/crafter/backups tomcat restore ./backups/<BACKUP_NAME>`.
+
+# Run a command inside a running container
+
+Running scripts or single commands inside a running container is pretty easy:
+
+1. `cd` to the authoring/delivery compose project folder.
+2. `docker-compose exec <SERVICE_NAME> gosu crafter <CMD> <PARAMETERS>`
+
+E.g.
+
+`docker-compose exec deployer gosu crafter ./bin/init-site.sh mysite /data/authoring/repos/sites/mysite/published`
+
+For each authoring and delivery compose files there are 3 services:
+
+- `elasticsearch`
+- `tomcat`
+- `deployer`
+
+For serverless S3 delivery there's only one service: `tomcat`.
+
+Please **ALWAYS** use `gosu crafter` with `docker-compose exec`. This ensures that all the commands are run as the 
+`crafter` user and that all new files and directories created belong to `crafter` (`gosu` is basically a version
+of `sudo` that works better on Docker).
+
+# Open a shell to a container
+
+Sometimes you'll need to get a shell to a container for debugging purposes. To do this, run the following command:
+
+`docker exec -it <CONTAINER_NAME> gosu crafter bash`
+
+This will open a Bash shell as the crafter user. The current directory will be `/opt/crafter`.

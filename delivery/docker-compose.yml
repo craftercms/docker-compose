@@ -40,6 +40,9 @@ services:
       - crafter_logs:/opt/crafter/logs
       - crafter_temp:/opt/crafter/temp
       - crafter_authoring_data:/data/authoring
+      # Elastic Search dirs needed for backup/restore
+      - elasticsearch_data:/opt/crafter/data/indexes-es
+      - elasticsearch_logs:/opt/crafter/logs/elasticsearch      
     environment:
       - ES_HOST=elasticsearch
       - ES_PORT=9200
@@ -63,7 +66,7 @@ volumes:
   elasticsearch_data:
     name: crafter_delivery_data_elasticsearch
   elasticsearch_logs:
-    name: crafter_delivery_logs_elasticsearch
+    name: crafter_delivery_logs_elasticsearch 
   crafter_data:
     name: crafter_delivery_data
   crafter_logs:
