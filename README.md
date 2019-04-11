@@ -15,8 +15,10 @@ files for production and use these as a reference.
 1. Install Docker (https://docs.docker.com/install/)
 2. Install Docker Compose (https://docs.docker.com/compose/install/)
 
-For Windows and Mac, we recommend you give Docker Desktop at least 8GB of RAM and 4 CPUs. To do this, go to Docker 
-Desktop's Settings > Advanced, and then change the resource limits.
+**For Windows and Mac, we recommend you give Docker Desktop at least 8GB of RAM and 4 CPUs. To do this, go to Docker 
+Desktop's Settings > Advanced, and then change the resource limits.**
+
+![Docker Advanced Settings](docker-advanced-settings.png)
 
 # Start Authoring Environment
 
@@ -46,11 +48,17 @@ the actual site name).
 # Start Serverless Delivery Environment
 
 1. Start the Authoring environment.
-2. Follow https://docs.craftercms.org/en/3.1/developers/cook-books/how-tos/setting-up-a-serverless-site.html to setup
-deployment to S3 for Delivery.
+2. Follow https://docs.craftercms.org/en/3.1/system-administrators/activities/delivery/setup-serverless-site.html from
+`Step 1: Create the site in the authoring environment` to `Step 3: Create the AWS Target in Authoring Crafter Deployer`.
+Don't do `Step 4: Configure the Delivery Crafter Engine for Serverless Mode`.
 3. `cd serverless/s3/delivery`.
-4. Copy `config/engine/server-config.properties.example` to `config/engine/server-config.properties` and edit the
-file to specify the required properties to read the content from Delivery (mostly just replace what's in `<>`).
+4. Specify in the `serverless/s3/delivery/.env` file the required environment variables: 
+   - **ES_URL:** The AWS Elasticsearch endpoint (or any other valid Elasticsearch URL).
+   - **crafter.engine.site.default.rootFolder.path:** The URL to the S3 bucket with the sites. Format is 
+     `s3://<BUCKET_NAME>/<SITES_ROOT>/{siteName}`. Example: `s3://serverless/sites/{siteName}`.
+   - **crafter.engine.s3.region:** The AWS region of the S3 bucket.
+   - **crafter.engine.s3.accessKey:** The AWS access key.
+   - **crafter.engine.s3.secretKey:** The AWS secret key.
 5. `docker-compose up` to run the containers in the foreground or `docker-compose up -d` to run them detached in the 
 background.
 
@@ -71,8 +79,8 @@ Settings > Shared Drives)
 3. `docker-compose run --rm --no-deps -v /host/path/to/backups:/opt/crafter/backups tomcat restore ./backups/<BACKUP_NAME>`.
 E.g. `docker-compose run --rm --no-deps -v C:/Users/jdoe/Documents/Backups:/opt/crafter/backups tomcat restore ./backups/crafter-authoring-backup.2019-03-28-00-58-33.zip`
 
-**NOTE:** In Windows, make sure `/host/path/to/backups` points to a path in a shared drive (check Docker Desktop's 
-Settings > Shared Drives)
+**NOTE:** In Windows and Mac, make sure `/host/path/to/backups` points to a path in a shared drive (check Docker 
+Desktop's Settings > Shared Drives)
 
 # Run a command inside a running container
 
