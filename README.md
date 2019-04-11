@@ -24,20 +24,19 @@ Desktop's Settings > Advanced, and then change the resource limits.**
 
 1. `cd authoring`.
 2. `docker-compose up` to run the containers in the foreground or `docker-compose up -d` to run them detached in the 
-background.
+background (and `docker-compose logs -f` to tail the logs).
 
 # Start Delivery Environment
 
 1. Start the Authoring environment.
 2. `cd delivery`.
 3. `docker-compose up` to run the containers in the foreground or `docker-compose up -d` to run them detached in the 
-background.
+background (and `docker-compose logs -f` to tail the logs).
 
 ## Create a Delivery Site
 
 1. `cd delivery`.
-2. `docker-compose exec deployer gosu crafter ./bin/init-site.sh <SITE_NAME> /data/authoring/repos/sites/<SITE_NAME>/published` 
-(remember to replace `<SITENAME>` for the actual site name).
+2. `docker-compose exec deployer gosu crafter ./bin/init-site.sh <SITE_NAME> /data/authoring/repos/sites/<SITE_NAME>/published` (remember to replace `<SITENAME>` for the actual site name).
 
 ## Delete a Delivery Site
 
@@ -60,7 +59,16 @@ Don't do *Step 4: Configure the Delivery Crafter Engine for Serverless Mode*.
    - **crafter.engine.s3.accessKey:** The AWS access key.
    - **crafter.engine.s3.secretKey:** The AWS secret key.
 5. `docker-compose up` to run the containers in the foreground or `docker-compose up -d` to run them detached in the 
-background.
+background (and `docker-compose logs -f` to tail the logs).
+
+# Stop an Environment
+
+- If `docker-compose` is running in the foreground, `CTRL+C` should stop the containers.
+- If `docker-compose` is running detached, then call `docker-compose stop` or `docker-compose down`. The difference
+between the two is that `down` will also remove the containers and networks created.
+
+You can also run `docker-compose down -v` to delete the volumes, which contain the data and logs, when you want to 
+start with a fresh install.
 
 # Backup Authoring/Delivery
 
@@ -107,8 +115,9 @@ of `sudo` that works better on Docker).
 
 # Open a shell to a container
 
-Sometimes you'll need to get a shell to a container for debugging purposes. To do this, run the following command:
+Sometimes you'll need to get a shell to a container for debugging purposes or for executing Git operations. To do this, 
+run the following command:
 
-`docker exec -it <CONTAINER_NAME> gosu crafter bash`
+`docker-compose exec <SERVICE_NAME> gosu crafter bash`
 
 This will open a Bash shell as the crafter user. The current directory will be `/opt/crafter`.
