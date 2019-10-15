@@ -121,7 +121,10 @@ This will open a Bash shell as the crafter user. The current directory will be `
 
 To use the Enterprise Edition instead of the Community Edition follow these steps:
 
-1. `cd scripts`
-2. `./use-enterprise.sh`
+1. `cd ENVIRONMENT`
+2. Copy your Crafter license under `./license/crafter.lic`
+3. `docker-compose -f docker-compose.yml -f docker-compose.enterprise.yml up` or `docker-compose -f docker-compose.yml -f docker-compose.enterprise.yml up -d`
 
-Then you can continue to use all previous commands.
+## Enteprise Edition Compatible With Solr
+
+Follow the previous steps, but in step 3, replace `docker-compose.enterprise.yml` with `docker-compose.solr.yml` (e.g. `docker-compose -f docker-compose.yml -f docker-compose.solr.yml up`)

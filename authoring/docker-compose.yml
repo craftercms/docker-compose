@@ -42,7 +42,6 @@ services:
       - crafter_temp:/opt/crafter/temp
       # Elastic Search dirs needed for backup/restore
       - elasticsearch_data:/opt/crafter/data/indexes-es
-      - elasticsearch_logs:/opt/crafter/logs/elasticsearch
     environment:
       - DEPLOYER_HOST=deployer
       - DEPLOYER_PORT=9191

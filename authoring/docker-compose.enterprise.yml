@@ -1,5 +1,3 @@
-#!/usr/bin/env bash
-
 # Copyright (C) 2007-2019 Crafter Software Corporation. All Rights Reserved.
 #
 # This program is free software: you can redistribute it and/or modify
@@ -13,13 +11,13 @@
 # GNU General Public License for more details.
 #
 # You should have received a copy of the GNU General Public License
-# along with this program.  If not, see <http://www.gnu.org/license
-
-LOCATIONS="authoring delivery serverless/s3/delivery"
-
-for LOCATION in $LOCATIONS
-do
-  echo "Updating $LOCATION"
-  sed -E -i.bak 's/image: ([^:]+):([^:]+) # craftercms version flag/image: \1:\2E # craftercms version flag/g' \
-    ../$LOCATION/docker-compose.yml
-done
+# along with this program.  If not, see <http://www.gnu.org/licenses/>.
+version: '3.7'
+services:
+  tomcat:
+    image: craftercms/authoring_tomcat:3.1.4E_BYOL # craftercms enterprise version flag
+    volumes:
+      # License (copy your license under ./license/crafter.lic)
+      - ./license/crafter.lic/:/opt/crafter/bin/apache-tomcat/shared/classes/crafter/license/crafter.lic
+  deployer:
+    image: craftercms/deployer:3.1.4E_BYOL # craftercms enterprise version flag
