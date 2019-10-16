@@ -123,8 +123,27 @@ To use the Enterprise Edition instead of the Community Edition follow these step
 
 1. `cd ENVIRONMENT`
 2. Copy your Crafter license under `./license/crafter.lic`
-3. `docker-compose -f docker-compose.yml -f docker-compose.enterprise.yml up` or `docker-compose -f docker-compose.yml -f docker-compose.enterprise.yml up -d`
+3. `docker-compose -f docker-compose.yml -f docker-compose.enterprise.yml up` or 
+`docker-compose -f docker-compose.yml -f docker-compose.enterprise.yml up -d`
 
 ## Enteprise Edition Compatible With Solr
 
-Follow the previous steps, but in step 3, replace `docker-compose.enterprise.yml` with `docker-compose.solr.yml` (e.g. `docker-compose -f docker-compose.yml -f docker-compose.solr.yml up`)
+Follow the previous steps, but in step 3, replace `docker-compose.enterprise.yml` with `docker-compose.solr.yml` 
+(e.g. `docker-compose -f docker-compose.yml -f docker-compose.solr.yml up`)
+
+# Mount the Authoring site repositories directory to a host directory
+
+Sometimes you'll need to have the Authoring site repositories available in the host filesystem, specially if 
+you want to update the files from your IDE. To make the sites available, follow these steps:
+
+**NOTE:** This will only work on an Authoring with no existing data. To clear the current data, run the same
+command you've been using to start up the environment, but replace the `up` part for `down -v`.
+
+0. Make sure the drive with the directory that will contain the sites is a shared drive (check Docker Desktop's 
+Settings > Shared Drives)
+1. `cd authoring`
+2. Open the `docker-compose.yaml` in an editor and add the following volume to both the `tomcat` and the `deployer` 
+service (assume `C` is the shared drived, and replace the `/host/path/to/sites` for the actual host path): 
+`- c:/host/path/to/sites:/opt/crafter/data/repos/sites`
+3. Start Authoring.
+4. Go to the Authoring browser URL and create a site. You should be able to see the files in your host directory!
