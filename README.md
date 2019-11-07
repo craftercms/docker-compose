@@ -36,12 +36,12 @@ background (and `docker-compose logs -f` to tail the logs).
 ## Create a Delivery Site
 
 1. `cd scripts`.
-2. `./init-site.sh <SITENAME>` (remember to replace `<SITENAME>` for the actual site name).
+2. `./init-site <SITENAME>` (remember to replace `<SITENAME>` for the actual site name).
 
 ## Delete a Delivery Site
 
 1. `cd scripts`.
-2. `./remove-site.sh <SITE_NAME>` (remember to replace `<SITE_NAME>` for the actual site name).
+2. `./remove-site <SITE_NAME>` (remember to replace `<SITE_NAME>` for the actual site name).
 
 # Start Serverless Delivery Environment
 
@@ -72,7 +72,7 @@ start with a fresh install.
 # Backup Authoring/Delivery
 
 1. `cd scripts`
-2. `./backup.sh <ENVIRONMENT> <BACKUP_FOLDER>` (remember to replace `<ENVIRONMENT>` (authoring or delivery) and `<BACKUP_FOLDER>`). E.g. `./backup authoring C:/Users/jdoe/Documents/Backups`
+2. `./backup <ENVIRONMENT> <BACKUP_FOLDER>` (remember to replace `<ENVIRONMENT>` (authoring or delivery) and `<BACKUP_FOLDER>`). E.g. `./backup authoring C:/Users/jdoe/Documents/Backups`
 
 **NOTE:** In Windows, make sure `/host/path/to/backups` points to a path in a shared drive (check Docker Desktop's 
 Settings > Shared Drives)
@@ -80,7 +80,7 @@ Settings > Shared Drives)
 # Restore Authoring/Delivery
 
 1. `cd scripts`
-2. `./restore.sh <ENVIRONMENT> <BACKUP_FOLDER> <BACKUP_FILE>` (remember to replace `<ENVIRONMENT>` (authoring or delivery), `<BACKUP_FOLDER>` and `<BACKUP_FILE>`). E.g. `./restore.sh authoring C:/Users/jdoe/Documents/Backups crafter-authoring-backup.2019-03-28-00-58-33.zip`
+2. `./restore <ENVIRONMENT> <BACKUP_FOLDER> <BACKUP_FILE>` (remember to replace `<ENVIRONMENT>` (authoring or delivery), `<BACKUP_FOLDER>` and `<BACKUP_FILE>`). E.g. `./restore authoring C:/Users/jdoe/Documents/Backups crafter-authoring-backup.2019-03-28-00-58-33.zip`
 
 **NOTE:** In Windows and Mac, make sure `/host/path/to/backups` points to a path in a shared drive (check Docker 
 Desktop's Settings > Shared Drives)
