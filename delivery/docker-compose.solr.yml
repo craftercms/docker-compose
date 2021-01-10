@@ -15,17 +15,17 @@
 version: '3.7'
 services:
   solr:
-    image: solr:7.7.2
+    build: solr
     ports:
       - 8695:8983
     environment:
       - "SOLR_OPTS=-Xss1024K -Xmx1G"
     volumes:
-      - ./config/solr/configsets/crafter_configs:/opt/solr/server/solr/configsets/crafter_configs
-      - solr_data:/var/solr/data
-      - solr_logs:/var/solr/logs
+      - ./solr/config/solr/configsets/crafter_configs:/opt/solr/server/solr/configsets/crafter_configs
+      - ./solr/config/solr/solr.xml:/opt/solr/server/solr/solr.xml
+      - solr_data:/opt/solr/server/solr/cores
   tomcat:
-    image: craftercms/delivery_tomcat_solr_compatible:3.1.11E_BYOL # craftercms enterprise version flag
+    image: craftercms/delivery_tomcat_solr_compatible:3.1.12E_BYOL # craftercms enterprise version flag
     volumes:
       # License (copy your license under ./license/crafter.lic)
       - ./license/crafter.lic:/opt/crafter/bin/apache-tomcat/shared/classes/crafter/license/crafter.lic
@@ -35,7 +35,7 @@ services:
       - SOLR_HOST=solr
       - SOLR_PORT=8983
   deployer:
-    image: craftercms/deployer:3.1.11E_BYOL # craftercms enterprise version flag
+    image: craftercms/deployer:3.1.12E_BYOL # craftercms enterprise version flag
     environment:
       - SOLR_HOST=solr
       - SOLR_PORT=8983
