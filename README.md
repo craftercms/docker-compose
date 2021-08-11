@@ -25,6 +25,8 @@ Desktop's Preferences > Resources > Advanced, and then change the resource limit
 Sometimes you'll need to have the Authoring site repositories available in the host filesystem, specially if 
 you want to update the files from your IDE. To make the sites available, follow these steps:
 
+**NOTE:** Performance may be slow when using WSL2 (Windows Subsystem for Linux 2) and a mounted Authoring site repositories directory to a host directory
+
 **NOTE:** This will only work on an Authoring with no existing data. To clear the current data, run the same
 command you've been using to start up the environment, but replace the `up` part for `down -v`.
 
