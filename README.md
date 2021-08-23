@@ -172,8 +172,3 @@ To use the Enterprise Edition instead of the Community Edition follow these step
 2. Copy your Crafter license under `./license/crafter.lic`
 3. `docker-compose -f docker-compose.yml -f docker-compose.enterprise.yml up` or
 `docker-compose -f docker-compose.yml -f docker-compose.enterprise.yml up -d`
-
-## Enterprise Edition Compatible With Solr
-
-Follow the previous steps, but in step 3, replace `docker-compose.enterprise.yml` with `docker-compose.solr.yml`
-(e.g. `docker-compose -f docker-compose.yml -f docker-compose.solr.yml up`)

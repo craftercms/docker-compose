@@ -1,4 +1,4 @@
-# Copyright (C) 2007-2019 Crafter Software Corporation. All Rights Reserved.
+# Copyright (C) 2007-2021 Crafter Software Corporation. All Rights Reserved.
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -15,9 +15,9 @@
 version: '3.7'
 services:
   tomcat:
-    image: craftercms/authoring_tomcat:3.1.18E-BETA_BYOL # craftercms enterprise version flag
+    image: craftercms/authoring_tomcat:4.0.0E-BETA_BYOL # craftercms enterprise version flag
     volumes:
       # License (copy your license under ./license/crafter.lic)
       - ./license/crafter.lic/:/opt/crafter/bin/apache-tomcat/shared/classes/crafter/license/crafter.lic
   deployer:
-    image: craftercms/deployer:3.1.18E-BETA_BYOL # craftercms enterprise version flag
+    image: craftercms/deployer:4.0.0E-BETA_BYOL # craftercms enterprise version flag
