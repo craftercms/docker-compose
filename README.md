@@ -33,9 +33,18 @@ command you've been using to start up the environment, but replace the `up` part
 0. Make sure the drive with the directory that will contain the sites is a shared drive (check Docker Desktop's 
 Preferences > Resources > File Sharing)
 1. `cd authoring`
-2. Open the `docker-compose.yaml` in an editor and add the following volume to both the `tomcat` and the `deployer` 
-service (assume `C` is the shared drive, and replace the `/host/path/to/sites` for the actual host path): 
-`- c:/host/path/to/sites:/opt/crafter/data/repos/sites`
+2. Open the `docker-compose.yaml` in an editor and edit the ``crafter_data`` volume like the following (assume `C` is the shared drive, and replace the `/host/path/to/sites` for the actual host path):
+
+   ```
+   crafter_data:
+     driver: local
+     driver_opts:
+       o: bind
+       type: none
+       device: C:/host/path/to/sites
+     name: crafter_authoring_data
+   ```
+   
 3. Once you have started the Authoring environment, by following the steps below, go to the Authoring browser URL and create a site. You should be able to see the files in your host directory!
 
 # Start Authoring Environment
