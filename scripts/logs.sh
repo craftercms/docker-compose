@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 # Copyright (C) 2007-2021 Crafter Software Corporation. All Rights Reserved.
 #
 # This program is free software: you can redistribute it and/or modify
@@ -11,13 +13,22 @@
 # GNU General Public License for more details.
 #
 # You should have received a copy of the GNU General Public License
-# along with this program.  If not, see <http://www.gnu.org/licenses/>.
-version: '3.7'
-services:
-  tomcat:
-    image: craftercms/authoring_tomcat:4.0.0E-BETA_BYOL # craftercms enterprise version flag
-    volumes:
-      # License (copy your license under ./license/crafter.lic)
-      - ./license/crafter.lic/:/opt/crafter/bin/apache-tomcat/shared/classes/crafter/license/crafter.lic
-  deployer:
-    image: craftercms/deployer:4.0.0E-BETA_BYOL # craftercms enterprise version flag
+# along with this program.  If not, see <http://www.gnu.org/license
+
+ENVIRONMENT=$1
+
+print_help()
+{
+  echo "Usage:"
+  echo "./logs.sh <ENVIRONMENT (authoring, delivery)>"
+  printf '\t%s\n' "-h, --help: Prints help"
+}
+
+if [[ "$ENVIRONMENT" != "authoring" && "$ENVIRONMENT" != "delivery" ]]; then
+  print_help
+  exit 1
+fi
+
+pushd ../$ENVIRONMENT
+docker-compose logs -f
+popd

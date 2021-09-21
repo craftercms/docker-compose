@@ -1,4 +1,4 @@
-# Copyright (C) 2007-2019 Crafter Software Corporation. All Rights Reserved.
+# Copyright (C) 2007-2021 Crafter Software Corporation. All Rights Reserved.
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -15,7 +15,7 @@
 version: '3.7'
 services:
   elasticsearch:
-    image: docker.elastic.co/elasticsearch/elasticsearch:6.8.6
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.7.1
     ports:
       - 9201:9200
     environment:
@@ -30,7 +30,7 @@ services:
       - elasticsearch_data:/usr/share/elasticsearch/data
       - elasticsearch_logs:/usr/share/elasticsearch/logs
   tomcat:
-    image: craftercms/authoring_tomcat:3.1.7-SNAPSHOT # craftercms version flag
+    image: craftercms/authoring_tomcat:4.0.0-SNAPSHOT # craftercms version flag
     depends_on:
       - elasticsearch
       - deployer
@@ -48,9 +48,9 @@ services:
       - ES_HOST=elasticsearch
       - ES_PORT=9200
   deployer:
-    image: craftercms/deployer:3.1.7-SNAPSHOT # craftercms version flag
+    image: craftercms/deployer:4.0.0-SNAPSHOT # craftercms version flag
     depends_on:
-      - elasticsearch  
+      - elasticsearch
     ports:
       - 9191:9191
     volumes:
