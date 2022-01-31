@@ -26,7 +26,7 @@ services:
       - ./solr/config/solr/solr.xml:/opt/solr/server/solr/solr.xml
       - solr_data:/opt/solr/server/solr/cores
   tomcat:
-    image: craftercms/delivery_tomcat_solr_compatible:3.1.19E-BETA_BYOL # craftercms enterprise version flag
+    image: craftercms/delivery_tomcat_solr_compatible:3.1.19E_BYOL # craftercms enterprise version flag
     volumes:
       # License (copy your license under ./license/crafter.lic)
       - ./license/crafter.lic:/opt/crafter/bin/apache-tomcat/shared/classes/crafter/license/crafter.lic
@@ -36,7 +36,7 @@ services:
       - SOLR_HOST=solr
       - SOLR_PORT=8983
   deployer:
-    image: craftercms/deployer:3.1.19E-BETA_BYOL # craftercms enterprise version flag
+    image: craftercms/deployer:3.1.19E_BYOL # craftercms enterprise version flag
     environment:
       - SOLR_HOST=solr
       - SOLR_PORT=8983
