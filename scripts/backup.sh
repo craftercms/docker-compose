@@ -15,8 +15,8 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/license
 
-ENVIRONMENT="$1"
-BACKUP_FOLDER="$2"
+ENVIRONMENT=$1
+BACKUP_FOLDER=$2
 
 if [ -z "$ENVIRONMENT" ] || [ -z "$BACKUP_FOLDER" ]; then
   echo "Usage:"
@@ -26,5 +26,5 @@ fi
 
 pushd ../$ENVIRONMENT
 docker-compose down
-docker-compose run --rm --no-deps -v "$BACKUP_FOLDER:/opt/crafter/backups" tomcat backup
+docker-compose run --rm --no-deps -v "$BACKUP_FOLDER:/opt/crafter/backups/" tomcat backup
 popd
