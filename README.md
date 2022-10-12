@@ -130,16 +130,14 @@ start with a fresh install.
 1. `cd scripts`
 2. `./backup <ENVIRONMENT> <BACKUP_FOLDER>` (remember to replace `<ENVIRONMENT>` (authoring or delivery) and `<BACKUP_FOLDER>`). E.g. `./backup authoring C:/Users/jdoe/Documents/Backups`
 
-**NOTE:** In Windows, make sure `/host/path/to/backups` points to a path in a shared drive (check Docker Desktop's
-Settings > Shared Drives)
+**NOTE:** In Windows, make sure `/host/path/to/backups` points to a path in a shared drive (check Docker Desktop's Settings > Shared Drives). Also in Window, to avoid issues when executing this script, enclose in double quotes (`""`) the path to your `<BACKUP_FOLDER>` in case it contains spaces. E.g. `backup.bat authoring "C:/Users/John Doe/Documents/Backups"`
 
 # Restore Authoring/Delivery
 
 1. `cd scripts`
 2. `./restore <ENVIRONMENT> <BACKUP_FOLDER> <BACKUP_FILE>` (remember to replace `<ENVIRONMENT>` (authoring or delivery), `<BACKUP_FOLDER>` and `<BACKUP_FILE>`). E.g. `./restore authoring C:/Users/jdoe/Documents/Backups crafter-authoring-backup.2019-03-28-00-58-33.zip`
 
-**NOTE:** In Windows and Mac, make sure `/host/path/to/backups` points to a path in a shared drive (check Docker
-Desktop's Settings > Shared Drives)
+**NOTE:** In Windows and Mac, make sure `/host/path/to/backups` points to a path in a shared drive (check Docker Desktop's Settings > Shared Drives). Also in Window, to avoid issues when executing this script, enclose in double quotes (`""`) the path to your `<BACKUP_FOLDER>` in case it contains spaces. E.g. `backup.bat authoring "C:/Users/John Doe/Documents/Backups"`
 
 # Run a command inside a running container
 
