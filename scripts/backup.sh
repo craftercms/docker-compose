@@ -26,5 +26,5 @@ fi
 
 pushd ../$ENVIRONMENT
 docker-compose down
-docker-compose run --rm --no-deps -v $BACKUP_FOLDER:/opt/crafter/backups tomcat backup
+docker-compose run --rm --no-deps -v "$BACKUP_FOLDER:/opt/crafter/backups/" tomcat backup
 popd

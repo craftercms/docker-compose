@@ -16,7 +16,7 @@ REM You should have received a copy of the GNU General Public License
 REM along with this program.  If not, see <http://www.gnu.org/license
 
 set ENVIRONMENT=%1
-set BACKUP_FOLDER=%2
+set BACKUP_FOLDER=%~2
 set BACKUP_FILE=%3
 
 if "%ENVIRONMENT%"=="" goto usage
@@ -27,8 +27,7 @@ if "%BACKUP_FILE%"=="" goto usage
 
 pushd ..\%ENVIRONMENT%
 docker-compose down
-docker-compose run --rm --no-deps -v %BACKUP_FOLDER%:/opt/crafter/backups^
-  tomcat restore ./backups/%BACKUP_FILE%
+docker-compose run --rm --no-deps -v "%BACKUP_FOLDER%:/opt/crafter/backups/" tomcat restore "./backups/%BACKUP_FILE%"
 popd
 goto end
 
