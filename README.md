@@ -13,7 +13,7 @@ files for production and use these as a reference.
 # Pre-requisites
 
 1. Install Docker (https://docs.docker.com/install/)
-2. Install Docker Compose (https://docs.docker.com/compose/install/)
+2. Install Docker Compose V2 (https://docs.docker.com/compose/install/)
 
 **For Windows and Mac, we recommend you give Docker Desktop at least 8GB of RAM and 4 CPUs. To do this, go to Docker
 Desktop's Preferences > Resources > Advanced, and then change the resource limits.**
@@ -59,8 +59,8 @@ $ ./logs authoring # to output log
 
 ## Start manual
 1. `cd authoring`.
-2. `docker-compose up` to run the containers in the foreground or `docker-compose up -d` to run them detached in the
-background (and `docker-compose logs -f` to tail the logs).
+2. `docker compose up` to run the containers in the foreground or `docker compose up -d` to run them detached in the
+background (and `docker compose logs -f` to tail the logs).
 
 # Start Delivery Environment
 
@@ -77,8 +77,8 @@ $ ./logs delivery # to output log
 
 1. Start the Authoring environment.
 2. `cd delivery`.
-3. `docker-compose up` to run the containers in the foreground or `docker-compose up -d` to run them detached in the
-background (and `docker-compose logs -f` to tail the logs).
+3. `docker compose up` to run the containers in the foreground or `docker compose up -d` to run them detached in the
+background (and `docker compose logs -f` to tail the logs).
 
 ## Create a Delivery Site
 
@@ -104,8 +104,8 @@ Don't do *Step 4: Configure the Delivery Crafter Engine for Serverless Mode*.
    - **crafter.engine.s3.region:** The AWS region of the S3 bucket.
    - **crafter.engine.s3.accessKey:** The AWS access key.
    - **crafter.engine.s3.secretKey:** The AWS secret key.
-5. `docker-compose up` to run the containers in the foreground or `docker-compose up -d` to run them detached in the
-background (and `docker-compose logs -f` to tail the logs).
+5. `docker compose up` to run the containers in the foreground or `docker compose up -d` to run them detached in the
+background (and `docker compose logs -f` to tail the logs).
 
 # Stop an Environment
 
@@ -119,10 +119,10 @@ $ ./stop <ENVIRONMENT (authoring, delivery)> [--delete-volumes, -v]
 ## Stop manual
 
 - If `docker-compose` is running in the foreground, `CTRL+C` should stop the containers.
-- If `docker-compose` is running detached, then call `docker-compose stop` or `docker-compose down`. The difference
+- If `docker-compose` is running detached, then call `docker compose stop` or `docker compose down`. The difference
 between the two is that `down` will also remove the containers and networks created.
 
-You can also run `docker-compose down -v` to delete the volumes, which contain the data and logs, when you want to
+You can also run `docker compose down -v` to delete the volumes, which contain the data and logs, when you want to
 start with a fresh install.
 
 # Backup Authoring/Delivery
@@ -144,11 +144,11 @@ start with a fresh install.
 Running scripts or single commands inside a running container is pretty easy:
 
 1. `cd` to the authoring/delivery compose project folder.
-2. `docker-compose exec <SERVICE_NAME> gosu crafter <CMD> <PARAMETERS>`
+2. `docker compose exec <SERVICE_NAME> gosu crafter <CMD> <PARAMETERS>`
 
 E.g.
 
-`docker-compose exec deployer gosu crafter ./bin/init-site.sh mysite /data/authoring/repos/sites/mysite/published`
+`docker compose exec deployer gosu crafter ./bin/init-site.sh mysite /data/authoring/repos/sites/mysite/published`
 
 For each authoring and delivery compose files there are 3 services:
 
@@ -158,7 +158,7 @@ For each authoring and delivery compose files there are 3 services:
 
 For serverless S3 delivery there's only one service: `tomcat`.
 
-Please **ALWAYS** use `gosu crafter` with `docker-compose exec`. This ensures that all the commands are run as the
+Please **ALWAYS** use `gosu crafter` with `docker compose exec`. This ensures that all the commands are run as the
 `crafter` user and that all new files and directories created belong to `crafter` (`gosu` is basically a version
 of `sudo` that works better on Docker).
 
@@ -167,7 +167,7 @@ of `sudo` that works better on Docker).
 Sometimes you'll need to get a shell to a container for debugging purposes or for executing Git operations. To do this,
 run the following command:
 
-`docker-compose exec <SERVICE_NAME> gosu crafter bash`
+`docker compose exec <SERVICE_NAME> gosu crafter bash`
 
 This will open a Bash shell as the crafter user. The current directory will be `/opt/crafter`.
 
@@ -177,5 +177,5 @@ To use the Enterprise Edition instead of the Community Edition follow these step
 
 1. `cd ENVIRONMENT`
 2. Copy your Crafter license under `./license/crafter.lic`
-3. `docker-compose -f docker-compose.yml -f docker-compose.enterprise.yml up` or
-`docker-compose -f docker-compose.yml -f docker-compose.enterprise.yml up -d`
+3. `docker compose -f docker-compose.yml -f docker-compose.enterprise.yml up` or
+`docker compose -f docker-compose.yml -f docker-compose.enterprise.yml up -d`

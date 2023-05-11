@@ -24,5 +24,5 @@ if [ -z "$SITE_NAME" ]; then
 fi
 
 pushd ../delivery
-docker-compose exec deployer gosu crafter ./bin/remove-site.sh $SITE_NAME
+docker compose exec deployer gosu crafter ./bin/remove-site.sh $SITE_NAME
 popd
