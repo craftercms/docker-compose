@@ -36,7 +36,7 @@ if "%ARG_DELETE_VOLUMES%" == "-v" (
     goto stop_compose_delete_volumes_confirm
 )
 pushd ..\%ENVIRONMENT%
-docker-compose down
+docker compose down
 popd
 goto end
 
@@ -58,7 +58,7 @@ goto end
 
 :stop_compose_delete_volumes
 pushd ..\%ENVIRONMENT%
-docker-compose down -v
+docker compose down -v
 popd
 goto end
 

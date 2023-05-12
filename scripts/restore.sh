@@ -26,6 +26,6 @@ if [ -z "$ENVIRONMENT" ] || [ -z "$BACKUP_FOLDER" ] || [ -z "$BACKUP_FILE" ]; th
 fi
 
 pushd ../$ENVIRONMENT
-docker-compose down
-docker-compose run --rm --no-deps -v "$BACKUP_FOLDER:/opt/crafter/backups/" tomcat restore "./backups/$BACKUP_FILE"
+docker compose down
+docker compose run --rm --no-deps -v "$BACKUP_FOLDER:/opt/crafter/backups/" tomcat restore "./backups/$BACKUP_FILE"
 popd
