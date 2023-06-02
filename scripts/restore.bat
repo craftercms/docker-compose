@@ -26,8 +26,8 @@ if "%BACKUP_FOLDER%"=="" goto usage
 if "%BACKUP_FILE%"=="" goto usage
 
 pushd ..\%ENVIRONMENT%
-docker-compose down
-docker-compose run --rm --no-deps -v "%BACKUP_FOLDER%:/opt/crafter/backups/" tomcat restore "./backups/%BACKUP_FILE%"
+docker compose down
+docker compose run --rm --no-deps -v "%BACKUP_FOLDER%:/opt/crafter/backups/" tomcat restore "./backups/%BACKUP_FILE%"
 popd
 goto end
 
