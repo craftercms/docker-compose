@@ -14,25 +14,26 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 version: '3.7'
 services:
-  elasticsearch:
-    image: docker.elastic.co/elasticsearch/elasticsearch:7.17.1
+  search:
+    image: opensearchproject/opensearch:2.7.0
     ports:
       - 9202:9200
     environment:
       - discovery.type=single-node
       - bootstrap.memory_lock=true
+      - plugins.security.disabled=true
       - "ES_JAVA_OPTS=-Xss1024K -Xmx1G"
     ulimits:
       memlock:
         soft: -1
         hard: -1
     volumes:
-      - elasticsearch_data:/usr/share/elasticsearch/data
-      - elasticsearch_logs:/usr/share/elasticsearch/logs
+      - search_data:/usr/share/opensearch/data
+      - search_logs:/usr/share/opensearch/logs
   tomcat:
     image: craftercms/delivery_tomcat:4.1.0-SNAPSHOT # craftercms version flag
     depends_on:
-      - elasticsearch
+      - search
     ports:
       - 9080:8080
     volumes:
@@ -40,15 +41,15 @@ services:
       - crafter_logs:/opt/crafter/logs
       - crafter_temp:/opt/crafter/temp
       - crafter_authoring_data:/data/authoring
-      # Elastic Search dirs needed for backup/restore
-      - elasticsearch_data:/opt/crafter/data/indexes-es
+      # Search dirs needed for backup/restore
+      - search_data:/opt/crafter/data/indexes
     environment:
-      - ES_HOST=elasticsearch
+      - ES_HOST=search
       - ES_PORT=9200
   deployer:
     image: craftercms/deployer:4.1.0-SNAPSHOT # craftercms version flag
     depends_on:
-      - elasticsearch
+      - search
     ports:
       - 9192:9191
     volumes:
@@ -59,13 +60,13 @@ services:
     environment:
       - TOMCAT_HOST=tomcat
       - TOMCAT_HTTP_PORT=8080
-      - ES_HOST=elasticsearch
+      - ES_HOST=search
       - ES_PORT=9200
 volumes:
-  elasticsearch_data:
-    name: crafter_delivery_data_elasticsearch
-  elasticsearch_logs:
-    name: crafter_delivery_logs_elasticsearch
+  search_data:
+    name: crafter_delivery_data_search
+  search_logs:
+    name: crafter_delivery_logs_search
   crafter_data:
     name: crafter_delivery_data
   crafter_logs:
