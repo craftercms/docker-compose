@@ -5,7 +5,7 @@ environments:
 
 * Authoring
 * Delivery
-* Serverless Delivery (external Elasticsearch service and content stored in S3)
+* Serverless Delivery (external OpenSearch service and content stored in S3)
 
 **NOTE:** These files are intended for development use only. We recommend you create your own set of Docker compose
 files for production and use these as a reference.
@@ -98,7 +98,7 @@ background (and `docker compose logs -f` to tail the logs).
 Don't do *Step 4: Configure the Delivery Crafter Engine for Serverless Mode*.
 3. `cd serverless/s3/delivery`.
 4. Specify in the `serverless/s3/delivery/.env` file the required environment variables:
-   - **ES_URL:** The AWS Elasticsearch endpoint (or any other valid Elasticsearch URL).
+   - **ES_URL:** The AWS OpenSearch endpoint (or any other valid OpenSearch URL).
    - **crafter.engine.site.default.rootFolder.path:** The URL to the S3 bucket with the sites. Format is
      `s3://<BUCKET_NAME>/<SITES_ROOT>/{siteName}`. Example: `s3://serverless/sites/{siteName}`.
    - **crafter.engine.s3.region:** The AWS region of the S3 bucket.
@@ -152,7 +152,7 @@ E.g.
 
 For each authoring and delivery compose files there are 3 services:
 
-- `elasticsearch`
+- `search`
 - `tomcat`
 - `deployer`
 
