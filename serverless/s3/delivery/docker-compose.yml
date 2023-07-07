@@ -15,7 +15,7 @@
 version: '3.7'
 services:
   tomcat:
-    image: craftercms/delivery_tomcat:4.0.6 # craftercms version flag
+    image: craftercms/delivery_tomcat:4.0.7-SNAPSHOT # craftercms version flag
     ports:
       - 9080:8080
     volumes:
