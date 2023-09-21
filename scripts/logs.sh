@@ -30,5 +30,5 @@ if [[ "$ENVIRONMENT" != "authoring" && "$ENVIRONMENT" != "delivery" ]]; then
 fi
 
 pushd ../$ENVIRONMENT
-docker-compose logs -f
+docker compose logs -f
 popd
