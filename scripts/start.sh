@@ -66,11 +66,11 @@ fi
 
 parse_commandline "${@:2}"
 
-command="docker-compose up -d"
+command="docker compose up -d"
 
 if [[ $_arg_enterprise == "true" ]]
 then
-  command="docker-compose -f docker-compose.yml -f docker-compose.enterprise.yml up -d"
+  command="docker compose -f docker-compose.yml -f docker-compose.enterprise.yml up -d"
 fi
 
 pushd ../$ENVIRONMENT

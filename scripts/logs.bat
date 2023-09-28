@@ -29,7 +29,7 @@ goto print_help
 
 :output_logs
 pushd ..\%ENVIRONMENT%
-docker-compose logs -f
+docker compose logs -f
 popd
 goto end
 

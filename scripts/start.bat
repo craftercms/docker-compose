@@ -36,13 +36,13 @@ if "%ARG_ENTERPRISE%" == "-e" (
     goto start_compose_enterprise
 )
 pushd ..\%ENVIRONMENT%
-docker-compose up -d
+docker compose up -d
 popd
 goto end
 
 :start_compose_enterprise
 pushd ..\%ENVIRONMENT%
-docker-compose -f docker-compose.yml -f docker-compose.enterprise.yml up -d
+docker compose -f docker-compose.yml -f docker-compose.enterprise.yml up -d
 popd
 goto end
 

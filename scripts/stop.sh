@@ -66,7 +66,7 @@ fi
 
 parse_commandline "${@:2}"
 
-command="docker-compose down"
+command="docker compose down"
 
 if [[ $_arg_delete_volumes == "true" ]]
 then

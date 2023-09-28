@@ -24,7 +24,7 @@ if "%SITE_NAME%"=="" (
 )
 
 pushd ..\delivery
-docker-compose exec deployer^
+docker compose exec deployer^
   gosu crafter ./bin/init-site.sh %SITE_NAME% /data/authoring/repos/sites/%SITE_NAME%/published
 popd
 
