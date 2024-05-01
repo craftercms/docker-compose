@@ -15,7 +15,7 @@
 version: '3.7'
 services:
   tomcat:
-    image: craftercms/delivery_tomcat:4.1.4E # craftercms enterprise version flag
+    image: craftercms/delivery_tomcat:4.1.5E-BETA # craftercms enterprise version flag
     volumes:
       # License (copy your license under ./license/crafter.lic)
       - ./license/crafter.lic:/opt/crafter/bin/apache-tomcat/shared/classes/crafter/license/crafter.lic
