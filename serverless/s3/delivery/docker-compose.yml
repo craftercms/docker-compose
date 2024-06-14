@@ -12,7 +12,6 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
-version: '3.7'
 services:
   tomcat:
     image: craftercms/delivery_tomcat:4.1.6-SNAPSHOT # craftercms version flag
