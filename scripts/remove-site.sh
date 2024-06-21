@@ -24,5 +24,15 @@ if [ -z "$SITE_NAME" ]; then
 fi
 
 pushd ../delivery
-docker compose exec deployer gosu crafter ./bin/remove-site.sh $SITE_NAME
+
+# Check if the current user inside the deployer container is 'crafter'
+CURRENT_USER=$(docker compose exec deployer id -un)
+TARGET_USER="crafter"
+
+if [ "$CURRENT_USER" != "$TARGET_USER" ]; then
+  docker compose exec deployer gosu crafter ./bin/remove-site.sh $SITE_NAME
+else
+  docker compose exec deployer ./bin/remove-site.sh $SITE_NAME
+fi
+
 popd
