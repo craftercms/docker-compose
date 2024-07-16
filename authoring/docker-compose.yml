@@ -14,13 +14,13 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 services:
   search:
-    image: opensearchproject/opensearch:2.9.0
+    image: opensearchproject/opensearch:2.13.0
     ports:
       - 9201:9200
     environment:
       - discovery.type=single-node
       - bootstrap.memory_lock=true
-      - plugins.security.disabled=true
+      - "DISABLE_SECURITY_PLUGIN=true"
       - "ES_JAVA_OPTS=-Xss1024K -Xmx1G"
     ulimits:
       memlock:
