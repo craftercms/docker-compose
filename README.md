@@ -144,11 +144,11 @@ start with a fresh install.
 Running scripts or single commands inside a running container is pretty easy:
 
 1. `cd` to the authoring/delivery compose project folder.
-2. `docker compose exec <SERVICE_NAME> gosu crafter <CMD> <PARAMETERS>`
+2. `docker compose exec <SERVICE_NAME> su crafter -c "<CMD> <PARAMETERS>"`
 
 E.g.
 
-`docker compose exec deployer gosu crafter ./bin/init-site.sh mysite /data/authoring/repos/sites/mysite/published`
+`docker compose exec deployer su crafter -c "./bin/init-site.sh mysite /data/authoring/repos/sites/mysite/published"`
 
 For each authoring and delivery compose files there are 3 services:
 
@@ -158,16 +158,14 @@ For each authoring and delivery compose files there are 3 services:
 
 For serverless S3 delivery there's only one service: `tomcat`.
 
-Please **ALWAYS** use `gosu crafter` with `docker compose exec`. This ensures that all the commands are run as the
-`crafter` user and that all new files and directories created belong to `crafter` (`gosu` is basically a version
-of `sudo` that works better on Docker).
+Please **ALWAYS** use `su crafter` with `docker compose exec`. This ensures that all the commands are run as the `crafter` user and that all new files and directories created belong to `crafter`.
 
 # Open a shell to a container
 
 Sometimes you'll need to get a shell to a container for debugging purposes or for executing Git operations. To do this,
 run the following command:
 
-`docker compose exec <SERVICE_NAME> gosu crafter bash`
+`docker compose exec <SERVICE_NAME> su crafter`
 
 This will open a Bash shell as the crafter user. The current directory will be `/opt/crafter`.
 

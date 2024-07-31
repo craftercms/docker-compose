@@ -24,7 +24,7 @@ if "%SITE_NAME%"=="" (
 )
 
 pushd ..\delivery
-docker compose exec deployer gosu crafter ./bin/remove-site.sh %SITE_NAME%
+docker compose exec deployer su crafter -c "./bin/remove-site.sh %SITE_NAME%"
 popd
 
 :end
