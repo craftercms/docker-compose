@@ -30,7 +30,7 @@ for /f "tokens=*" %%i in ('docker compose exec deployer id -un') do set CURRENT_
 set TARGET_USER=crafter
 
 if "%CURRENT_USER%" neq "%TARGET_USER%" (
-  docker compose exec deployer gosu crafter ./bin/remove-site.sh %SITE_NAME%
+  docker compose exec deployer su crafter -c "./bin/remove-site.sh %SITE_NAME%"
 ) else (
   docker compose exec deployer ./bin/remove-site.sh %SITE_NAME%
 )

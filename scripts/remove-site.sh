@@ -30,7 +30,7 @@ CURRENT_USER=$(docker compose exec deployer id -un)
 TARGET_USER="crafter"
 
 if [ "$CURRENT_USER" != "$TARGET_USER" ]; then
-  docker compose exec deployer gosu crafter ./bin/remove-site.sh $SITE_NAME
+  docker compose exec deployer su crafter -c "./bin/remove-site.sh $SITE_NAME"
 else
   docker compose exec deployer ./bin/remove-site.sh $SITE_NAME
 fi

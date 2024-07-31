@@ -30,7 +30,7 @@ for /f "tokens=*" %%i in ('docker compose exec deployer id -un') do set CURRENT_
 set TARGET_USER=crafter
 
 if "%CURRENT_USER%" neq "%TARGET_USER%" (
-  docker compose exec deployer gosu crafter ./bin/init-site.sh %SITE_NAME% /data/authoring/repos/sites/%SITE_NAME%/published
+  docker compose exec deployer su crafter -c "./bin/init-site.sh %SITE_NAME% /data/authoring/repos/sites/%SITE_NAME%/published"
 ) else (
   docker compose exec deployer ./bin/init-site.sh %SITE_NAME% /data/authoring/repos/sites/%SITE_NAME%/published
 )
