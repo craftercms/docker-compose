@@ -24,7 +24,17 @@ if "%SITE_NAME%"=="" (
 )
 
 pushd ..\delivery
-docker compose exec deployer gosu crafter ./bin/remove-site.sh %SITE_NAME%
+
+REM Check if the current user inside the deployer container is 'crafter'
+for /f "tokens=*" %%i in ('docker compose exec deployer id -un') do set CURRENT_USER=%%i
+set TARGET_USER=crafter
+
+if "%CURRENT_USER%" neq "%TARGET_USER%" (
+  docker compose exec deployer su crafter -c "./bin/remove-site.sh %SITE_NAME%"
+) else (
+  docker compose exec deployer ./bin/remove-site.sh %SITE_NAME%
+)
+
 popd
 
 :end

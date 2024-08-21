@@ -24,6 +24,15 @@ if [ -z "$SITE_NAME" ]; then
 fi
 
 pushd ../delivery
-docker compose exec deployer \
-  gosu crafter ./bin/init-site.sh $SITE_NAME /data/authoring/repos/sites/$SITE_NAME/published
+
+# Check if the current user inside the deployer container is 'crafter'
+CURRENT_USER=$(docker compose exec deployer id -un)
+TARGET_USER="crafter"
+
+if [ "$CURRENT_USER" != "$TARGET_USER" ]; then
+  docker compose exec deployer su crafter -c "./bin/init-site.sh $SITE_NAME /data/authoring/repos/sites/$SITE_NAME/published"
+else
+  docker compose exec deployer ./bin/init-site.sh $SITE_NAME /data/authoring/repos/sites/$SITE_NAME/published
+fi
+
 popd
