@@ -14,9 +14,9 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 services:
   tomcat:
-    image: craftercms/authoring_tomcat:4.1.7 # craftercms enterprise version flag
+    image: craftercms/authoring_tomcat:4.1.8 # craftercms enterprise version flag
     volumes:
       # License (copy your license under ./license/crafter.lic)
       - ./license/crafter.lic/:/opt/crafter/bin/apache-tomcat/shared/classes/crafter/license/crafter.lic
   deployer:
-    image: craftercms/deployer:4.1.7 # craftercms enterprise version flag
+    image: craftercms/deployer:4.1.8 # craftercms enterprise version flag
