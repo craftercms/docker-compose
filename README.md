@@ -158,8 +158,7 @@ For each authoring and delivery compose files there are 3 services:
 
 For serverless S3 delivery there's only one service: `tomcat`.
 
-Please **ALWAYS** use `su crafter` with `docker compose exec`. This ensures that all the commands are run as the
-`crafter` user and that all new files and directories created belong to `crafter`.
+Please **ALWAYS** use `su crafter` with `docker compose exec`. This ensures that all the commands are run as the `crafter` user and that all new files and directories created belong to `crafter`.
 
 # Open a shell to a container
 
