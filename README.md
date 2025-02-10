@@ -93,7 +93,7 @@ background (and `docker compose logs -f` to tail the logs).
 # Start Serverless Delivery Environment
 
 1. Start the Authoring environment.
-2. Follow https://docs.craftercms.org/en/3.1/system-administrators/activities/delivery/setup-serverless-site.html from
+2. Follow https://craftercms.com/docs/current/reference/modules/engine/configuration.html#serverless-delivery from
 *Step 1: Create the site in the authoring environment* to *Step 3: Create the AWS Target in Authoring Crafter Deployer*.
 Don't do *Step 4: Configure the Delivery Crafter Engine for Serverless Mode*.
 3. `cd serverless/s3/delivery`.
