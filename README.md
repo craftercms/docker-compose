@@ -20,6 +20,20 @@ Desktop's Preferences > Resources > Advanced, and then change the resource limit
 
 ![Docker Advanced Settings](docker-advanced-settings.png)
 
+## ARM64 Architecture (Apple Silicon Macs)
+
+When running on ARM64 architecture (like Apple Silicon M1/M2/M3 Macs), CrafterCMS Docker images require emulation because they are built for x86_64/AMD64 architecture. This emulation adds overhead and may cause performance issues or timeouts during operations.
+
+### Recommended settings for ARM64 Macs:
+
+1. **Increased Resources**: Ensure Docker Desktop is provisioned with sufficient CPU cores and memory to accommodate the performance overhead introduced by platform emulation.
+
+2. **Timeout Issues**: If you encounter timeout errors when creating or working with sites:
+   - Try increasing the Docker resources further
+   - Allow operations more time to complete, especially during initial site creation
+
+3. **Performance Expectations**: Even with optimal settings, performance will be slower than on native x86_64 hardware due to the architecture emulation.
+
 # Mount the Authoring site repositories directory to a host directory
 
 Sometimes you'll need to have the Authoring site repositories available in the host filesystem, specially if
