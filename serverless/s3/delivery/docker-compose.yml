@@ -15,6 +15,7 @@
 services:
   tomcat:
     image: craftercms/delivery_tomcat:5.0.0-SNAPSHOT # craftercms version flag
+    platform: linux/amd64
     ports:
       - 9080:8080
     volumes:
